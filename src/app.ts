@@ -4,7 +4,7 @@ import { FastifyPluginAsync, FastifyServerOptions } from 'fastify';
 
 import apm from 'elastic-apm-node';
 
-const apmInstance = apm.start({
+apm.start({
   serviceName: '',
   secretToken: '',
   serverUrl: 'http://apm-server-apm-http.logging.svc:8200',
