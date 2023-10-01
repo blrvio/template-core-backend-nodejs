@@ -6,7 +6,7 @@ import apm from 'elastic-apm-node';
 
 apm.start({
   serviceName: packageInfo.name,
-  secretToken: '3I37i8ewHBx3G8SmiEu0x590',
+  secretToken: process.env.APM_TOKEN || '77iy7PN7DklYu9uPO3e739p2',
   serverUrl: process.env.APM_URL || 'https://apm-server-apm-http.logging.svc:8200',
   environment: process.env.NODE_ENV || 'development',
   verifyServerCert: false,
