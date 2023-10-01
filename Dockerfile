@@ -1,5 +1,8 @@
-# Use a imagem oficial do Node.js como base
-FROM node:14
+# Use a imagem oficial do Node.js Alpine como base
+FROM node:20-alpine
+
+# Instale o Yarn
+RUN npm install -g yarn
 
 # Defina o diretório de trabalho no container
 WORKDIR /usr/src/app
@@ -8,7 +11,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Instale as dependências do projeto
-RUN yarn add
+RUN yarn install
 
 # Copie o restante dos arquivos do projeto para o container
 COPY . .
