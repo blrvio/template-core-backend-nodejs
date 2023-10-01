@@ -1,14 +1,14 @@
 import { join } from 'path';
 import AutoLoad, {AutoloadPluginOptions} from '@fastify/autoload';
 import { FastifyPluginAsync, FastifyServerOptions } from 'fastify';
-
+const packageInfo = require('../package.json');
 import apm from 'elastic-apm-node';
 
 apm.start({
-  serviceName: '',
+  serviceName: packageInfo.name,
   secretToken: '',
-  serverUrl: 'http://apm-server-apm-http.logging.svc:8200',
-  environment: 'production'
+  serverUrl: process.env.APM_URL || 'https://apm-server-apm-http.logging.svc:8200',
+  environment: process.env.NODE_ENV || 'development'
 });
 
 
