@@ -2,10 +2,8 @@ import { join } from 'path';
 import AutoLoad, {AutoloadPluginOptions} from '@fastify/autoload';
 import { FastifyPluginAsync, FastifyServerOptions } from 'fastify';
 
-// Import the APM module
 import apm from 'elastic-apm-node';
 
-// Start the APM instance
 const apmInstance = apm.start({
   serviceName: '',
   secretToken: '',
