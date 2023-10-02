@@ -1,4 +1,4 @@
-import "./services/apm.service";
+import apm from './services/apm.service';
 import { join } from 'path';
 import AutoLoad, { AutoloadPluginOptions } from '@fastify/autoload';
 import { FastifyPluginAsync, FastifyServerOptions } from 'fastify';
@@ -15,20 +15,28 @@ const app: FastifyPluginAsync<AppOptions> = async (
   fastify,
   opts,
 ): Promise<void> => {
-  // Place here your custom code!
 
-  // Do not touch the following lines
+  if (apm.isStarted()) {
+    console.info("APM started");
+    fastify.setErrorHandler((error, request, reply) => {
+      // seu código para lidar com erros
+      apm.captureError(error);
+      reply.send(error);
+    });
+    fastify.setNotFoundHandler((request, reply) => {
+      // seu código para lidar com erros 404
+      apm.captureError('Route not found');
+      reply.code(404).send({ error: 'Not Found' });
+    });
+  } else {
+    console.info("APM not started");
+  }
 
-  // This loads all plugins defined in plugins
-  // those should be support plugins that are reused
-  // through your application
   void fastify.register(AutoLoad, {
     dir: join(__dirname, 'plugins'),
     options: opts,
   });
 
-  // This loads all plugins defined in routes
-  // define your routes in one of these
   void fastify.register(AutoLoad, {
     dir: join(__dirname, 'routes'),
     options: opts,

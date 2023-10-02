@@ -9,5 +9,9 @@ if (process.env.APM_ENABLED) {
       process.env.APM_URL || 'https://apm-server-apm-http.logging.svc:8200',
     environment: process.env.NODE_ENV || 'development',
     verifyServerCert: false,
+    usePathAsTransactionName: true,
   });
 }
+
+export default apm;
+export { apm };
