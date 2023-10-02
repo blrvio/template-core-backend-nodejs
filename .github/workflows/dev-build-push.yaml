@@ -104,7 +104,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
+          repository: ghcr.io/${{ github.repository }}
           tag: ${{ github.ref_name }}
 
       - name: Send Telegram Notification
