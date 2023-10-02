@@ -98,14 +98,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push Docker Image
-        uses: docker/push-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          repository: ghcr.io/${{ github.repository }}
-          tag: ${{ github.ref_name }}
+     - run: |
+          docker push ghcr.io/${{ github.repository }}:${{ github.ref_name }}
 
       - name: Send Telegram Notification
         if: ${{ always() }}
