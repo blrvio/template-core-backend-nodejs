@@ -77,13 +77,12 @@ jobs:
       - name: Run Trivy vulnerability scanner on Docker image
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'image'
-          scan-ref: 'ghcr.io/${{ github.repository }}:${{ github.ref_name }}'
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
-          output: 'trivy-image-results.sarif'
+          image-ref: 'ghcr.io/${{ github.repository }}:${{ github.ref_name }}'
+          format: 'table'
           exit-code: '1'
-          trivy-config: trivy-hml.yaml
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
 
   push-and-notify:
     needs: image-security-tests
