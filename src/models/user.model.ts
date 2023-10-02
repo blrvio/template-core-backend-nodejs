@@ -1,29 +1,29 @@
 import { Schema, model } from 'mongoose';
+import { IBaseResource, BaseResourceSchema } from './base.model';
 
-const UserSchema = new Schema({
-  id: String,
-  name: String,
-  description: String,
-  thumbnail_url: String,
-  kind: String,
-  metadata: {
-    created_at: Date,
-    last_modified: Date,
-    modified_by: String,
-    last_login: Date
-  },
-  resource_data: {
-    default_org: String,
-    email: String,
-    phone: String,
-    account_status: {
-      type: String,
-      enum: ['active', 'inactive', 'suspended'],
-      default: 'active'
+interface IUser extends IBaseResource {
+    resource_data: {
+        default_org: string;
+        email: string;
+        phone: string;
+        account_status: string;
+    };
+}
+
+const UserSchema: Schema = new Schema({
+    ...BaseResourceSchema.obj,
+    resource_data: {
+        default_org: { type: Schema.Types.ObjectId, ref: 'Organization', required: false },
+        email: { type: String, required: true },
+        phone: { type: String, required: true },
+        account_status: {
+            type: String,
+            required: true,
+            enum: ['active', 'inactive', 'disabled']
+        }
     }
-  }
 });
 
-const User = model('User', UserSchema);
+const User = model<IUser>('User', UserSchema);
 
-export default User;
+export { IUser, User };
