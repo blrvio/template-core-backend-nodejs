@@ -10,6 +10,7 @@ if (process.env.APM_ENABLED) {
     environment: process.env.NODE_ENV || 'development',
     verifyServerCert: false,
     usePathAsTransactionName: true,
+    frameworkName: "Fastify",
   });
 }
 
