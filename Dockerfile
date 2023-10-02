@@ -11,7 +11,6 @@ COPY package*.json ./
 RUN yarn install
 RUN apk --no-cache add curl
 
-
 # Copie o restante dos arquivos do projeto para o container
 COPY . .
 
@@ -22,3 +21,8 @@ HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost:3000/healthc
 
 # Comando para rodar a aplicação
 CMD ["yarn", "start"]
+
+
+
+# API First
+# CI/CD

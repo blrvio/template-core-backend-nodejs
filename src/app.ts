@@ -3,6 +3,10 @@ import { join } from 'path';
 import AutoLoad, { AutoloadPluginOptions } from '@fastify/autoload';
 import { FastifyPluginAsync, FastifyServerOptions } from 'fastify';
 
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'homologation') {
+  require('dotenv').config();
+}
+
 export interface AppOptions
   extends FastifyServerOptions,
     Partial<AutoloadPluginOptions> {}
@@ -14,20 +18,19 @@ const app: FastifyPluginAsync<AppOptions> = async (
   fastify,
   opts,
 ): Promise<void> => {
-
   if (apm.isStarted()) {
-    console.info("APM started");
+    console.info('APM started');
     fastify.setErrorHandler((err, request, reply) => {
       apm.captureError(err);
       reply.send(err);
     });
     fastify.setNotFoundHandler((request, reply) => {
-      var err = new Error('Route Not Found')
+      var err = new Error('Route Not Found');
       apm.captureError(err);
       reply.code(404).send({ error: 'Not Found' });
     });
   } else {
-    console.info("APM not started");
+    console.info('APM not started');
   }
 
   void fastify.register(AutoLoad, {
