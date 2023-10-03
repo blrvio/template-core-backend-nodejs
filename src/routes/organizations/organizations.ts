@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FastifyPluginAsync } from 'fastify';
 import {
   createOrganization,
@@ -9,7 +10,6 @@ import {
 
 const organizationRoutes: FastifyPluginAsync = async (
   fastify,
-  opts,
 ): Promise<void> => {
   // Rota para Criar uma Nova Organização
   fastify.post('/', async (request: any, reply) => {

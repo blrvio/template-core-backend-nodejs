@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-types */
 import fp from 'fastify-plugin';
 import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-export default fp(async (fastify, opts: any) => {
+export default fp(async fastify => {
   await fastify.register(swagger, {
     swagger: {
       info: {
@@ -52,11 +54,7 @@ export default fp(async (fastify, opts: any) => {
     },
     staticCSP: true,
     transformStaticCSP: (header: string) => header,
-    transformSpecification: (
-      swaggerObject: any,
-      request: FastifyRequest,
-      reply: FastifyReply,
-    ) => {
+    transformSpecification: (swaggerObject: any, request: FastifyRequest) => {
       swaggerObject.host = request.hostname; // Ajusta o hostname dinamicamente
       return swaggerObject;
     },

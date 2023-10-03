@@ -24,7 +24,7 @@ reports:
   format: json
 
   # Template para o relatório
-  template: "@/contrib/sarif.tpl"
+  template: '@/contrib/sarif.tpl'
 
   # Caminho do arquivo de saída
   output: trivy-report.json

@@ -8,6 +8,6 @@ export default fp(async fastify => {
     max: 100,
     timeWindow: '1 minute',
   });
-//   fastify.register(require('@fastify/auth'));
-//   fastify.register(require('fastify-acl-auth'));
+  //   fastify.register(require('@fastify/auth'));
+  //   fastify.register(require('fastify-acl-auth'));
 });

@@ -4,7 +4,6 @@ metadata:
   name: ns-app-template-core-backend
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,15 +20,14 @@ spec:
         app: app-template-core-backend
     spec:
       containers:
-      - name: app-container
-        image: ghcr.io/blrvio/template-core-backend-nodejs:development
-        imagePullPolicy: Always
-        env:
-        - name: APM_ENABLED
-          value: "true"
+        - name: app-container
+          image: ghcr.io/blrvio/template-core-backend-nodejs:development
+          imagePullPolicy: Always
+          env:
+            - name: APM_ENABLED
+              value: 'true'
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -44,7 +42,6 @@ spec:
       targetPort: 3000
 
 ---
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

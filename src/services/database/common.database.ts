@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import mongoose from 'mongoose';
 
 const dbUri = process.env.MONGODB_URI as string;

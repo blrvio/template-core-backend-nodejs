@@ -1,9 +1,13 @@
+/* eslint-disable no-console */
 import apm from './services/apm.service';
 import { join } from 'path';
 import AutoLoad, { AutoloadPluginOptions } from '@fastify/autoload';
 import { FastifyPluginAsync, FastifyServerOptions } from 'fastify';
 
-if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'homologation') {
+if (
+  process.env.NODE_ENV !== 'production' &&
+  process.env.NODE_ENV !== 'homologation'
+) {
   require('dotenv').config();
 }
 
