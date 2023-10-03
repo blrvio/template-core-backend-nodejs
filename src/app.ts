@@ -25,7 +25,7 @@ const app: FastifyPluginAsync<AppOptions> = async (
       reply.send(err);
     });
     fastify.setNotFoundHandler((request, reply) => {
-      var err = new Error('Route Not Found');
+      const err = new Error('Route Not Found');
       apm.captureError(err);
       reply.code(404).send({ error: 'Not Found' });
     });
