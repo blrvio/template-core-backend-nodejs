@@ -15,7 +15,7 @@ const organizationRoutes: FastifyPluginAsync = async (
   fastify.post('/', async (request: any, reply) => {
     const data: any = request.body;
     const newOrganization = await createOrganization(data);
-    reply.send(newOrganization);
+    reply.send(newOrganization); 
   });
 
   // Rota para Obter uma Organização pelo ID

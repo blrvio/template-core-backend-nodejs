@@ -31,7 +31,6 @@ const BaseResourceSchema: Schema = new Schema({
   metadata: {
     created_at: { type: Date, default: Date.now },
     last_modified: { type: Date, default: Date.now },
-    modified_by: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   },
 });
 

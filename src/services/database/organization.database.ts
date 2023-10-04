@@ -2,7 +2,7 @@ import { IOrganization, Organization } from '../../models/organization.model';
 import { connectDb, disconnectDb } from './common.database';
 
 async function createOrganization(
-  data: IOrganization['resource_data'],
+  data: IOrganization,
 ): Promise<IOrganization> {
   await connectDb();
   const organization = new Organization({ resource_data: data });
