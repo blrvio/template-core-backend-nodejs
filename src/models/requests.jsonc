@@ -1,0 +1,28 @@
+[
+  // objeto para criar um usuário
+  {
+    "name": "Jonatas Winston",
+    "description": "Eu sou o cara",
+    "thumbnail_url": "https://pbs.twimg.com/profile_images/1648476513346678784/V9dLq9XD_400x400.jpg",
+    "idp_uuid": "1234",
+    "email": "jonataswinston@icloud.com"
+  },
+  // resposta
+  {
+    "name": "Jonatas Winston",
+    "description": "Eu sou o cara",
+    "thumbnail_url": "https://pbs.twimg.com/profile_images/1648476513346678784/V9dLq9XD_400x400.jpg",
+    "kind": "orgresources:user",
+    "metadata": {
+      "created_at": "2023-10-04T01:28:28.419Z",
+      "last_modified": "2023-10-04T01:28:28.419Z"
+    },
+    "id": "usr_54aba86d-c8bd-4cb7-9f8a-9066c007beb3",
+    "resource_data": {
+      "idp_uuid": "1234",
+      "email": "jonataswinston@icloud.com",
+      "phone": "undefined",
+      "account_status": "active"
+    }
+  }
+]

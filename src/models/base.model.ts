@@ -34,4 +34,21 @@ const BaseResourceSchema: Schema = new Schema({
   },
 });
 
+// Middleware para setar a data de modificação no momento da atualização
+BaseResourceSchema.pre('updateOne', function(next) {
+  this.set({ 'metadata.last_modified': Date.now() });
+  next();
+});
+
+// Middleware para setar a data de criação e modificação no momento da criação
+BaseResourceSchema.pre('save', function(next) {
+  if (this.isNew) {
+    this.set({ 
+      'metadata.created_at': Date.now(),
+      'metadata.last_modified': Date.now()
+    });
+  }
+  next();
+});
+
 export { IBaseResource, BaseResourceSchema };
