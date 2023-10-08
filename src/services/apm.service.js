@@ -1,5 +1,5 @@
 const packageInfo = require('../../package.json');
-import apm from 'elastic-apm-node';
+const apm = require('elastic-apm-node');
 
 if (process.env.APM_ENABLED) {
   apm.start({
@@ -14,5 +14,5 @@ if (process.env.APM_ENABLED) {
   });
 }
 
-export default apm;
-export { apm };
+module.exports = apm;
+module.exports.apm = apm;

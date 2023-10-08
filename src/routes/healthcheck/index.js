@@ -1,6 +1,6 @@
-import { FastifyPluginAsync } from 'fastify';
+const { FastifyPluginAsync } = require('fastify');
 
-const healthCheck: FastifyPluginAsync = async (fastify): Promise<void> => {
+const healthCheck = async (fastify) => {
   fastify.get('/', async function (_request, reply) {
     try {
       // Simula uma verificação de saúde, substitua pelo seu próprio código
@@ -25,4 +25,4 @@ const healthCheck: FastifyPluginAsync = async (fastify): Promise<void> => {
   });
 };
 
-export default healthCheck;
+module.exports = healthCheck;

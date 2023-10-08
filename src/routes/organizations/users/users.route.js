@@ -1,7 +1,6 @@
-import { FastifyPluginAsync } from 'fastify';
-import { createUser } from '../../../controllers/user.controller';
+const { createUser } = require('../../../controllers/user.controller');
 
-const usersRoutes: FastifyPluginAsync = async (fastify): Promise<void> => {
+const usersRoutes = async (fastify) => {
   fastify.post('/', {
     schema: {
       description: 'Create a new user',
@@ -68,8 +67,9 @@ const usersRoutes: FastifyPluginAsync = async (fastify): Promise<void> => {
         },
       },
     },
+    preHandler: fastify.checkAuth,
     handler: createUser,
   });
 };
 
-export default usersRoutes;
+module.exports = usersRoutes;

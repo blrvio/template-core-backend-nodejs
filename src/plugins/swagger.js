@@ -1,11 +1,15 @@
+// Disabling ESLint rules can be done at the top of the file
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-import fp from 'fastify-plugin';
-import swagger from '@fastify/swagger';
-import swaggerUI from '@fastify/swagger-ui';
-import { FastifyRequest, FastifyReply } from 'fastify';
 
-export default fp(async fastify => {
+// Importing necessary modules
+const fp = require('fastify-plugin');
+const swagger = require('@fastify/swagger');
+const swaggerUI = require('@fastify/swagger-ui');
+
+// Exporting the plugin as a default export
+module.exports = fp(async fastify => {
+  // Registering the swagger plugin with fastify
   await fastify.register(swagger, {
     swagger: {
       info: {
@@ -37,6 +41,7 @@ export default fp(async fastify => {
     },
   });
 
+  // Registering the swagger UI plugin with fastify
   await fastify.register(swaggerUI, {
     routePrefix: '/apidocs',
     uiConfig: {
@@ -45,17 +50,17 @@ export default fp(async fastify => {
       supportedSubmitMethods: ['get', 'put', 'post', 'delete'],
     },
     uiHooks: {
-      onRequest(request: FastifyRequest, reply: FastifyReply, next: Function) {
+      onRequest(request, reply, next) {
         next();
       },
-      preHandler(request: FastifyRequest, reply: FastifyReply, next: Function) {
+      preHandler(request, reply, next) {
         next();
       },
     },
     staticCSP: true,
-    transformStaticCSP: (header: string) => header,
-    transformSpecification: (swaggerObject: any, request: FastifyRequest) => {
-      swaggerObject.host = request.hostname; // Ajusta o hostname dinamicamente
+    transformStaticCSP: header => header,
+    transformSpecification: (swaggerObject, request) => {
+      swaggerObject.host = request.hostname; // Adjusts the hostname dynamically
       return swaggerObject;
     },
     transformSpecificationClone: true,
