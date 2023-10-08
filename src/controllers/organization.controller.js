@@ -5,7 +5,6 @@ const {
   disconnectDb,
 } = require('../services/database/common.database');
 const { checkUUIDFromToken } = require('../services/database/plugins.database');
-// const { getUIDFromToken } = require('../services/auth/tokenvalidation.service');
 
 /**
  * Controller for creating a new organization.
@@ -41,7 +40,13 @@ async function createOrganization(request, reply) {
   }
 }
 
-// Controller para ler dados sobre uma organização específica
+/**
+ * Controller for reading data about a specific organization.
+ *
+ * @param {FastifyRequest<{ Params: { id: string } }>} request - The Fastify request object
+ * @param {FastifyReply} reply - The Fastify reply object
+ * @returns {Promise<void>}
+ */
 async function readOrganization(request, reply) {
   try {
     const user_uuid = await checkUUIDFromToken(request.user);
@@ -49,7 +54,6 @@ async function readOrganization(request, reply) {
     await connectDb();
     const organization = await Organization.findOne({
       id: orgId,
-
       $or: [
         { 'resource_data.iam.read_users': user_uuid },
         { 'resource_data.iam.write_users': user_uuid },
@@ -68,6 +72,13 @@ async function readOrganization(request, reply) {
   }
 }
 
+/**
+ * Controller for reading data about all organizations.
+ *
+ * @param {FastifyRequest} request - The Fastify request object
+ * @param {FastifyReply} reply - The Fastify reply object
+ * @returns {Promise<void>}
+ */
 async function readAllOrganizations(request, reply) {
   try {
     const user_uuid = await checkUUIDFromToken(request.user);
@@ -92,7 +103,13 @@ async function readAllOrganizations(request, reply) {
   }
 }
 
-// Controller para modificar uma organização específica
+/**
+ * Controller for updating a specific organization.
+ *
+ * @param {FastifyRequest<{ Params: { id: string }, Body: object }>} request - The Fastify request object
+ * @param {FastifyReply} reply - The Fastify reply object
+ * @returns {Promise<void>}
+ */
 async function updateOrganization(request, reply) {
   try {
     const user_uuid = await checkUUIDFromToken(request.user);
@@ -122,7 +139,13 @@ async function updateOrganization(request, reply) {
   }
 }
 
-// Controller para excluir uma organização específica
+/**
+ * Controller for deleting a specific organization.
+ *
+ * @param {FastifyRequest<{ Params: { id: string } }>} request - The Fastify request object
+ * @param {FastifyReply} reply - The Fastify reply object
+ * @returns {Promise<void>}
+ */
 async function deleteOrganization(request, reply) {
   try {
     const user_uuid = await checkUUIDFromToken(request.user);
