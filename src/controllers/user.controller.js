@@ -3,16 +3,6 @@ const { User } = require('../models/user.model');
 const { connectDb, disconnectDb } = require('../services/database/common.database');
 
 /**
- * @typedef CreateUserRequestBody
- * @property {string} thumbnail_url - Thumbnail URL
- * @property {string} name - User name
- * @property {string} description - User description
- * @property {string} email - User email
- * @property {string} idp_uuid - IDP UUID
- * @property {string} phone - User phone
- */
-
-/**
  * Controller for creating a new user.
  *
  * @param {FastifyRequest<{ Body: CreateUserRequestBody }>} request - The Fastify request object
@@ -50,19 +40,76 @@ async function createUser(request, reply) {
     await disconnectDb();
   }
 }
-
-/**
- * Controller for listing users.
- *
- * @param {FastifyRequest} request - The Fastify request object
- * @param {FastifyReply} reply - The Fastify reply object
- * @returns {Promise<void>}
- */
-async function listUsers(request, reply) {
+// Controller para ler dados sobre um usuário específico
+async function readUser(request, reply) {
   try {
+    const userId = request.params.id;
     await connectDb();
-    const users = await User.find();
-    reply.send(users);
+    const user = await User.findById(userId).exec();
+    if (user) {
+      reply.code(200).send(user);
+    } else {
+      reply.code(404).send({ error: 'User not found' });
+    }
+  } catch (error) {
+    reply.code(500).send({ error: error });
+  } finally {
+    await disconnectDb();
+  }
+}
+
+// Controller para ler dados sobre todos os usuários de uma org específica (com paginação)
+async function readAllUsers(request, reply) {
+  try {
+    const orgId = request.params.orgId;  // Obtém o orgId dos parâmetros da requisição
+    if (!orgId) {
+      reply.code(400).send({ error: 'Organization ID is required' });
+      return;
+    }
+    await connectDb();
+    const page = parseInt(request.query.page) || 1;
+    const limit = parseInt(request.query.limit) || 10;
+    const skip = (page - 1) * limit;
+    const users = await User.find({ orgId }).skip(skip).limit(limit).exec();  // Busca usuários baseado no orgId
+    reply.code(200).send(users);
+  } catch (error) {
+    reply.code(500).send({ error: error });
+  } finally {
+    await disconnectDb();
+  }
+}
+
+
+// Controller para modificar um usuário específico
+async function updateUser(request, reply) {
+  try {
+    const userId = request.params.id;
+    const updateData = request.body;
+    await connectDb();
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true }).exec();
+    if (updatedUser) {
+      reply.code(200).send(updatedUser);
+    } else {
+      reply.code(404).send({ error: 'User not found' });
+    }
+  } catch (error) {
+    reply.code(500).send({ error: error });
+  } finally {
+    await disconnectDb();
+  }
+}
+
+// Controller para excluir um usuário específico
+async function deleteUser(request, reply) {
+  try {
+    const userId = request.params.id;
+    await connectDb();
+    const deletedUser = await User.findByIdAndDelete(userId).exec();
+    if (deletedUser) {
+      reply.code(200).send({ message: 'User deleted successfully' });
+    } else {
+      reply.code(404).send({ error: 'User not found' });
+    }
   } catch (error) {
     reply.code(500).send({ error: error });
   } finally {
@@ -72,5 +119,8 @@ async function listUsers(request, reply) {
 
 module.exports = {
   createUser,
-  listUsers
+  readUser,
+  readAllUsers,
+  updateUser,
+  deleteUser,
 };
