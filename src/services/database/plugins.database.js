@@ -3,7 +3,7 @@ const { connectDb, disconnectDb } = require('./common.database');
 
 /**
  * Generates a prefixed unique identifier using a UUID.
- * 
+ *
  * @param {Object} options - The options for generating the prefixed identifier.
  * @param {string} options.prefix - The prefix to prepend to the UUID.
  * @returns {string} - The prefixed UUID.
@@ -22,11 +22,11 @@ async function checkUUIDFromToken(user) {
     const foundUser = await User.findOne({ idp_uuid: user.uid }).exec();
     disconnectDb();
     if (foundUser) {
-      return foundUser.id;  // Retorna o campo id do usuário encontrado
+      return foundUser.id; // Retorna o campo id do usuário encontrado
     } else {
-      throw new Error('User not found');  // Lança um erro se o usuário não for encontrado
+      throw new Error('User not found'); // Lança um erro se o usuário não for encontrado
     }
   }
 }
 
-module.exports = {idPrefixPlugin, checkUUIDFromToken};
+module.exports = { idPrefixPlugin, checkUUIDFromToken };

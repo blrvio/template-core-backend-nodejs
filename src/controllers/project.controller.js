@@ -97,7 +97,7 @@ async function updateProject(request, reply) {
         ],
       },
       updateData,
-      { new: true }
+      { new: true },
     ).exec();
     if (project) {
       reply.code(200).send(project);

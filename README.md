@@ -1,11 +1,13 @@
 # Briefing do Projeto: Plataforma SaaS para PMEs
 
 ## Descrição do Projeto
+
 Desenvolver uma plataforma SaaS voltada para atender pequenas e médias empresas que procuram uma solução completa para estabelecer seus negócios.
 
 ## Funcionalidades
 
 ### PDV
+
 1. **Controle de Estoque:** Uma visão detalhada do inventário, com capacidades de monitoramento, notificações de reabastecimento e relatórios.
 2. **Lista de Produtos e Serviços:** Catálogo digital, facilmente atualizável, de todos os produtos e serviços disponíveis.
 3. **Cardápio Digital:** Opção para estabelecimentos de alimentos exibirem seus itens. Com recurso para converter cardápio digital em cardápio físico.
@@ -16,6 +18,7 @@ Desenvolver uma plataforma SaaS voltada para atender pequenas e médias empresas
 8. **Point / Maquininha de Pagamentos (App):** Interface para processar pagamentos.
 
 ### Conta Digital
+
 1. **Verificar Saldo:** Uma visão rápida do saldo atual.
 2. **Fazer Transferência:** Capacidade de transferir dinheiro para outros bancos ou contas.
 3. **Gerar Link de Assinatura:** Criar links de pagamento recorrente ou único.
@@ -23,6 +26,7 @@ Desenvolver uma plataforma SaaS voltada para atender pequenas e médias empresas
 ## Tecnologias Utilizadas
 
 ### Backend
+
 - **Linguagem & Framework:** Node.js com Fastify.
 - **Documentação:** JSDocs para código e OpenAPI/Swagger para APIs.
 - **Conceito:** Clean Code.
@@ -32,21 +36,26 @@ Desenvolver uma plataforma SaaS voltada para atender pequenas e médias empresas
 - **Orquestração:** Em desenvolvimento usaremos o Microk8s (rede local). Para produção, Google Kubernetes Engine (GKE).
 
 ### Frontend
+
 - **Framework:** Next.js.
 - **CSS:** TailwindCSS.
 - **Hospedagem:** Vercel.
 - **CDN & WAF:** Cloudflare.
 
 ### Banco de Dados
+
 - **DB:** MongoDB Atlas (baseado em nuvem).
 
 ### Autenticação
+
 - **Serviço:** Firebase Auth.
 
 ## CI/CD
+
 Utilizaremos o GitHub para integração contínua e entrega contínua.
 
 ## Recomendações
+
 1. **Testes Automatizados:** Considerando a natureza do projeto, é crucial ter testes automatizados para garantir a integridade e funcionalidade da plataforma.
 2. **Monitoramento e Log:** Ferramentas como o Prometheus ou Grafana podem ser incorporadas para monitoramento. Logs centralizados, como o ELK stack ou Graylog, também podem ser considerados.
 3. **Backup Regular do Banco de Dados:** Assegure-se de ter uma estratégia sólida para backups regulares do MongoDB Atlas.
@@ -54,6 +63,7 @@ Utilizaremos o GitHub para integração contínua e entrega contínua.
 5. **API Rate Limiting:** Proteja suas APIs contra abusos, usando soluções como o Cloudflare ou plugins Fastify específicos.
 
 ## Funcionalidades Desenvolvidas (conforme as rotas fornecidas):
+
 - [x] **Criação de Organização**: Permite criar uma nova organização.
 - [x] **Leitura de Organização Específica**: Obtém informações sobre uma organização específica com base em seu ID.
 - [x] **Leitura de Todas as Organizações**: Obtém informações sobre todas as organizações.
@@ -61,6 +71,7 @@ Utilizaremos o GitHub para integração contínua e entrega contínua.
 - [x] **Deleção de Organização Específica**: Exclui uma organização específica com base em seu ID.
 
 ## Funcionalidades que Faltam Ser Desenvolvidas (com base no briefing):
+
 - [ ] **Controle de Estoque**: Gerenciamento e monitoramento do inventário.
 - [ ] **Lista de Produtos e Serviços**: Catálogo digital.
 - [ ] **Cardápio Digital e Físico**: Criação e gestão de cardápios.
@@ -72,6 +83,7 @@ Utilizaremos o GitHub para integração contínua e entrega contínua.
 - [ ] **Conta Digital**: Funcionalidades financeiras básicas, como verificar saldo, transferências, e geração de links de assinatura.
 
 ## Sugestões de Novas Funcionalidades:
+
 - [ ] **Notificações**: Sistema de notificações para informar os usuários sobre pedidos, alterações de estoque, atualizações de produtos ou qualquer outra atividade importante.
 - [ ] **Análise de Vendas e Relatórios**: Ferramentas de análise para monitorar as vendas, tendências e gerar relatórios.
 - [ ] **Programa de Fidelidade**: Sistema para recompensar clientes frequentes ou grandes compradores.

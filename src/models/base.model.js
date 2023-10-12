@@ -15,17 +15,17 @@ const { base_model } = require('./datastructure');
 const BaseResourceSchema = new mongoose.Schema(base_model);
 
 // Middleware to set the last modification date on update
-BaseResourceSchema.pre('updateOne', function(next) {
+BaseResourceSchema.pre('updateOne', function (next) {
   this.set({ 'metadata.last_modified': Date.now() });
   next();
 });
 
 // Middleware to set the creation and last modification date on save
-BaseResourceSchema.pre('save', function(next) {
+BaseResourceSchema.pre('save', function (next) {
   if (this.isNew) {
     this.set({
       'metadata.created_at': Date.now(),
-      'metadata.last_modified': Date.now()
+      'metadata.last_modified': Date.now(),
     });
   }
   next();

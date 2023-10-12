@@ -3,7 +3,7 @@ const { connectDb, disconnectDb } = require('./common.database');
 
 /**
  * Creates a new organization.
- * 
+ *
  * @param {Object} data - The data for the organization.
  * @returns {Promise<Object>} - The created organization.
  */
@@ -16,7 +16,7 @@ async function createOrganization(data) {
 
 /**
  * Gets an organization by ID.
- * 
+ *
  * @param {string} id - The ID of the organization.
  * @returns {Promise<Object|null>} - The organization or null if not found.
  */
@@ -29,7 +29,7 @@ async function getOrganizationById(id) {
 
 /**
  * Lists all organizations.
- * 
+ *
  * @returns {Promise<Object[]>} - The list of organizations.
  */
 async function listOrganizations() {
@@ -41,7 +41,7 @@ async function listOrganizations() {
 
 /**
  * Updates an organization.
- * 
+ *
  * @param {string} id - The ID of the organization.
  * @param {Object} data - The data to update.
  * @returns {Promise<Object|null>} - The updated organization or null if not found.
@@ -59,7 +59,7 @@ async function updateOrganization(id, data) {
 
 /**
  * Deletes an organization.
- * 
+ *
  * @param {string} id - The ID of the organization.
  * @returns {Promise<Object|null>} - The deleted organization or null if not found.
  */

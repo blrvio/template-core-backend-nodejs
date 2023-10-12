@@ -1,41 +1,37 @@
 const fp = require('fastify-plugin');
-const admin = require("firebase-admin");
-const { initializeApp } = require("firebase/app");
-const { getAuth, signInWithCustomToken } = require("firebase/auth");
+const admin = require('firebase-admin');
+const { initializeApp } = require('firebase/app');
+const { getAuth, signInWithCustomToken } = require('firebase/auth');
 
 module.exports = fp(async fastify => {
   // Initialize Firebase Admin SDK
   admin.initializeApp({
-    credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_ADMIN))
+    credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_ADMIN)),
   });
-
 
   generateTokenForTesting();
 
   // Fastify middleware to check JWT token
-  fastify.decorate(
-    'checkAuth',
-    async (request, reply) => {
-      console.log('handler called');
-      
-      const { authorization } = request.headers;
-      const token = authorization?.replace('Bearer ', '');
+  fastify.decorate('checkAuth', async (request, reply) => {
+    console.log('handler called');
 
-      if (!token) {
-        reply.status(401).send({ error: 'Unauthorized' });
-        return;
-      }
+    const { authorization } = request.headers;
+    const token = authorization?.replace('Bearer ', '');
 
-      try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        request.user = decodedToken;
-        request.admin = admin;
-      } catch (error) {
-        console.error(error);
-        reply.status(401).send({ error: error || 'Unauthorized' });
-      }
-    },
-  );
+    if (!token) {
+      reply.status(401).send({ error: 'Unauthorized' });
+      return;
+    }
+
+    try {
+      const decodedToken = await admin.auth().verifyIdToken(token);
+      request.user = decodedToken;
+      request.admin = admin;
+    } catch (error) {
+      console.error(error);
+      reply.status(401).send({ error: error || 'Unauthorized' });
+    }
+  });
 });
 
 async function generateTokenForTesting() {

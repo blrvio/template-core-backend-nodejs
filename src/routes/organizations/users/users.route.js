@@ -93,7 +93,6 @@ const usersRoutes = async fastify => {
     handler: readUser,
   });
 
-
   // Rota para atualizar um usuário específico
   fastify.patch('/', {
     schema: {

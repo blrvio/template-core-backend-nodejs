@@ -1,4 +1,4 @@
-const {idPrefixPlugin} = require('../services/database/plugins.database');
+const { idPrefixPlugin } = require('../services/database/plugins.database');
 const mongoose = require('mongoose');
 
 const base_model = {
@@ -110,4 +110,10 @@ const project_model = {
   },
 };
 
-module.exports = {base_model, user_model, project_model, resource_model, organization_model}
+module.exports = {
+  base_model,
+  user_model,
+  project_model,
+  resource_model,
+  organization_model,
+};

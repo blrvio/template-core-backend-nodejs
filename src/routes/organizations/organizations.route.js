@@ -1,6 +1,12 @@
-const { createOrganization, readOrganization, deleteOrganization, updateOrganization, readAllOrganizations } = require('../../controllers/organization.controller');
+const {
+  createOrganization,
+  readOrganization,
+  deleteOrganization,
+  updateOrganization,
+  readAllOrganizations,
+} = require('../../controllers/organization.controller');
 
-const organizationsRoutes = async (fastify) => {
+const organizationsRoutes = async fastify => {
   fastify.post('/', {
     schema: {
       description: 'Create a new organization',
@@ -17,9 +23,15 @@ const organizationsRoutes = async (fastify) => {
           type: 'object',
           properties: {
             name: { type: 'string', description: 'Organization name' },
-            description: { type: 'string', description: 'Organization description' },
+            description: {
+              type: 'string',
+              description: 'Organization description',
+            },
             thumbnail_url: { type: 'string', description: 'Thumbnail URL' },
-            kind: { type: 'string', description: 'Kind of organization resource' },
+            kind: {
+              type: 'string',
+              description: 'Kind of organization resource',
+            },
             metadata: {
               type: 'object',
               description: 'Metadata of organization resource',
@@ -44,12 +56,27 @@ const organizationsRoutes = async (fastify) => {
                 iam: {
                   type: 'object',
                   properties: {
-                    read_users: { type: 'array', items: { type: 'string' }, description: 'Read access users' },
-                    write_users: { type: 'array', items: { type: 'string' }, description: 'Write access users' },
-                    owner_user: { type: 'string', description: 'Owner access users' },
+                    read_users: {
+                      type: 'array',
+                      items: { type: 'string' },
+                      description: 'Read access users',
+                    },
+                    write_users: {
+                      type: 'array',
+                      items: { type: 'string' },
+                      description: 'Write access users',
+                    },
+                    owner_user: {
+                      type: 'string',
+                      description: 'Owner access users',
+                    },
                   },
                 },
-                projects: { type: 'array', items: { type: 'string' }, description: 'Projects of organization' },
+                projects: {
+                  type: 'array',
+                  items: { type: 'string' },
+                  description: 'Projects of organization',
+                },
               },
             },
           },

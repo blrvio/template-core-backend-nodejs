@@ -1,6 +1,6 @@
 const { FastifyPluginAsync } = require('fastify');
 
-const healthCheck = async (fastify) => {
+const healthCheck = async fastify => {
   fastify.get('/', async function (_request, reply) {
     try {
       // Simula uma verificação de saúde, substitua pelo seu próprio código
@@ -10,12 +10,10 @@ const healthCheck = async (fastify) => {
       if (isDatabaseHealthy && isExternalApiHealthy) {
         reply.status(200).send({ status: 'ok' });
       } else {
-        reply
-          .status(500)
-          .send({
-            status: 'error',
-            details: 'database or external API is down',
-          });
+        reply.status(500).send({
+          status: 'error',
+          details: 'database or external API is down',
+        });
       }
     } catch (error) {
       // eslint-disable-next-line no-console
