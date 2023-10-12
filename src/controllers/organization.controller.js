@@ -71,10 +71,11 @@ async function readOrganization(request, reply) {
     await disconnectDb();
   }
 }
-
+ 
 /**
  * Controller for reading data about all organizations.
  *
+ * 
  * @param {FastifyRequest} request - The Fastify request object
  * @param {FastifyReply} reply - The Fastify reply object
  * @returns {Promise<void>}
