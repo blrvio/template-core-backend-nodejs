@@ -38,6 +38,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Run Trivy vulnerability scanner on project dependencies
         uses: aquasecurity/trivy-action@master
@@ -51,12 +53,13 @@ jobs:
           trivy-config: trivy-hml.yaml
 
   build-image:
-    #needs: security-tests
-    needs: test-app
+    needs: security-tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -74,6 +77,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Run Trivy vulnerability scanner on Docker image
         uses: aquasecurity/trivy-action@master
