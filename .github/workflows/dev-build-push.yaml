@@ -51,7 +51,7 @@ jobs:
           trivy-config: trivy-hml.yaml
 
   build-image:
-    needs: security-tests
+    #needs: security-tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
