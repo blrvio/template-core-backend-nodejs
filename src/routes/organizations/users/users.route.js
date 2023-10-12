@@ -1,6 +1,12 @@
-const { createUser } = require('../../../controllers/user.controller');
+const {
+  createUser,
+  readUser,
+  readAllUsers,
+  updateUser,
+  deleteUser,
+} = require('../../../controllers/user.controller');
 
-const usersRoutes = async (fastify) => {
+const usersRoutes = async fastify => {
   fastify.post('/', {
     schema: {
       description: 'Create a new user',
@@ -69,6 +75,61 @@ const usersRoutes = async (fastify) => {
     },
     preHandler: fastify.checkAuth,
     handler: createUser,
+  });
+
+  // Rota para ler um usuário específico
+  fastify.get('/:id', {
+    schema: {
+      description: 'Get information about a specific user',
+      tags: ['user'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string', description: 'User ID' },
+        },
+      },
+    },
+    preHandler: fastify.checkAuth,
+    handler: readUser,
+  });
+
+
+  // Rota para atualizar um usuário específico
+  fastify.patch('/', {
+    schema: {
+      description: 'Update a specific user',
+      tags: ['user'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string', description: 'User ID' },
+        },
+      },
+      body: {
+        type: 'object',
+        properties: {
+          /* Adicione as propriedades que deseja permitir atualizar aqui */
+        },
+      },
+    },
+    preHandler: fastify.checkAuth,
+    handler: updateUser,
+  });
+
+  // Rota para deletar um usuário específico
+  fastify.delete('/:id', {
+    schema: {
+      description: 'Delete a specific user',
+      tags: ['user'],
+      params: {
+        type: 'object',
+        properties: {
+          id: { type: 'string', description: 'User ID' },
+        },
+      },
+    },
+    preHandler: fastify.checkAuth,
+    handler: deleteUser,
   });
 };
 

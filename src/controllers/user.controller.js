@@ -1,6 +1,9 @@
 const { FastifyRequest, FastifyReply } = require('fastify');
 const { User } = require('../models/user.model');
-const { connectDb, disconnectDb } = require('../services/database/common.database');
+const {
+  connectDb,
+  disconnectDb,
+} = require('../services/database/common.database');
 
 /**
  * Controller for creating a new user.
@@ -61,7 +64,7 @@ async function readUser(request, reply) {
 // Controller para ler dados sobre todos os usuários de uma org específica (com paginação)
 async function readAllUsers(request, reply) {
   try {
-    const orgId = request.params.orgId;  // Obtém o orgId dos parâmetros da requisição
+    const orgId = request.params.orgId; // Obtém o orgId dos parâmetros da requisição
     if (!orgId) {
       reply.code(400).send({ error: 'Organization ID is required' });
       return;
@@ -70,7 +73,7 @@ async function readAllUsers(request, reply) {
     const page = parseInt(request.query.page) || 1;
     const limit = parseInt(request.query.limit) || 10;
     const skip = (page - 1) * limit;
-    const users = await User.find({ orgId }).skip(skip).limit(limit).exec();  // Busca usuários baseado no orgId
+    const users = await User.find({ orgId }).skip(skip).limit(limit).exec(); // Busca usuários baseado no orgId
     reply.code(200).send(users);
   } catch (error) {
     reply.code(500).send({ error: error });
@@ -79,21 +82,23 @@ async function readAllUsers(request, reply) {
   }
 }
 
-
 // Controller para modificar um usuário específico
 async function updateUser(request, reply) {
   try {
-    const userId = request.params.id;
+    const userId = request.user.appuid; // Usuário atualmente autenticado
+
     const updateData = request.body;
     await connectDb();
-    const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true }).exec();
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+      new: true,
+    }).exec();
     if (updatedUser) {
       reply.code(200).send(updatedUser);
     } else {
       reply.code(404).send({ error: 'User not found' });
     }
   } catch (error) {
-    reply.code(500).send({ error: error });
+    reply.code(500).send({ error: error.message });
   } finally {
     await disconnectDb();
   }
@@ -102,7 +107,8 @@ async function updateUser(request, reply) {
 // Controller para excluir um usuário específico
 async function deleteUser(request, reply) {
   try {
-    const userId = request.params.id;
+    const userId = request.user.appuid; // Usuário atualmente autenticado
+
     await connectDb();
     const deletedUser = await User.findByIdAndDelete(userId).exec();
     if (deletedUser) {
@@ -111,7 +117,7 @@ async function deleteUser(request, reply) {
       reply.code(404).send({ error: 'User not found' });
     }
   } catch (error) {
-    reply.code(500).send({ error: error });
+    reply.code(500).send({ error: error.message });
   } finally {
     await disconnectDb();
   }
