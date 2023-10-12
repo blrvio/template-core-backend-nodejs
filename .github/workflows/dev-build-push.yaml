@@ -52,6 +52,7 @@ jobs:
 
   build-image:
     #needs: security-tests
+    needs: test-app
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
