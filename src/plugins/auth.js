@@ -9,7 +9,9 @@ module.exports = fp(async fastify => {
     credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_ADMIN)),
   });
 
-  generateTokenForTesting();
+  if (process.env.NODE_ENV === 'development') {
+    await generateTokenForTesting();
+  }
 
   // Fastify middleware to check JWT token
   fastify.decorate('checkAuth', async (request, reply) => {
