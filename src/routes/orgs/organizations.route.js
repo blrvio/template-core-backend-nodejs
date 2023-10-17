@@ -1,10 +1,11 @@
+const { orgResponseSchema, orgListResponseSchema } = require('../../models/openapi/organizations.oas');
 const {
   createOrganization,
   readOrganization,
   deleteOrganization,
   updateOrganization,
   readAllOrganizations,
-} = require('../../controllers/organization.controller');
+} = require('./organization.controller');
 
 const organizationsRoutes = async fastify => {
   fastify.post('/', {
@@ -17,78 +18,7 @@ const organizationsRoutes = async fastify => {
           name: { type: 'string', description: 'Organization name' },
         },
       },
-      response: {
-        201: {
-          description: 'Successful response',
-          type: 'object',
-          properties: {
-            name: { type: 'string', description: 'Organization name' },
-            description: {
-              type: 'string',
-              description: 'Organization description',
-            },
-            thumbnail_url: { type: 'string', description: 'Thumbnail URL' },
-            kind: {
-              type: 'string',
-              description: 'Kind of organization resource',
-            },
-            metadata: {
-              type: 'object',
-              description: 'Metadata of organization resource',
-              properties: {
-                created_at: {
-                  type: 'string',
-                  format: 'date-time',
-                  description: 'Creation timestamp',
-                },
-                last_modified: {
-                  type: 'string',
-                  format: 'date-time',
-                  description: 'Last modification timestamp',
-                },
-              },
-            },
-            id: { type: 'string', description: 'Organization ID' },
-            resource_data: {
-              type: 'object',
-              description: 'Resource data of organization',
-              properties: {
-                iam: {
-                  type: 'object',
-                  properties: {
-                    read_users: {
-                      type: 'array',
-                      items: { type: 'string' },
-                      description: 'Read access users',
-                    },
-                    write_users: {
-                      type: 'array',
-                      items: { type: 'string' },
-                      description: 'Write access users',
-                    },
-                    owner_user: {
-                      type: 'string',
-                      description: 'Owner access users',
-                    },
-                  },
-                },
-                projects: {
-                  type: 'array',
-                  items: { type: 'string' },
-                  description: 'Projects of organization',
-                },
-              },
-            },
-          },
-        },
-        500: {
-          description: 'Internal server error',
-          type: 'object',
-          properties: {
-            error: { type: 'string' },
-          },
-        },
-      },
+      response: orgResponseSchema,
     },
     preHandler: fastify.checkAuth,
     handler: createOrganization,
@@ -104,6 +34,7 @@ const organizationsRoutes = async fastify => {
           id: { type: 'string', description: 'Organization ID' },
         },
       },
+      response: orgResponseSchema,
     },
     preHandler: fastify.checkAuth,
     handler: readOrganization,
@@ -113,6 +44,7 @@ const organizationsRoutes = async fastify => {
     schema: {
       description: 'Get information about all organizations',
       tags: ['organization'],
+      response: orgListResponseSchema,
     },
     preHandler: fastify.checkAuth,
     handler: readAllOrganizations,
@@ -128,10 +60,21 @@ const organizationsRoutes = async fastify => {
           id: { type: 'string', description: 'Organization ID' },
         },
       },
+      body: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', nullable: true, description: 'Org name' },
+          description: { type: 'string', nullable: true, description: 'Org description' },
+          thumbnail_url: { type: 'string', format: 'uri', nullable: true, description: 'URL of the org thumbnail' },
+        },
+        required: [],
+      },
+      response: orgResponseSchema,
     },
     preHandler: fastify.checkAuth,
     handler: updateOrganization,
-  });
+});
+
 
   fastify.delete('/:id', {
     schema: {
@@ -170,6 +113,11 @@ const organizationsRoutes = async fastify => {
     preHandler: fastify.checkAuth,
     handler: deleteOrganization,
   });
+
+  fastify.register(require('./projects/projects.route'), {
+    prefix: '/:orgid/projects',
+  });
+  fastify.register(require('./iam/iam.route'), { prefix: '/:orgId/iam' });
 };
 
 module.exports = organizationsRoutes;

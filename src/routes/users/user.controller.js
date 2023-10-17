@@ -1,9 +1,9 @@
 const { FastifyRequest, FastifyReply } = require('fastify');
-const { User } = require('../models/user.model');
+const { User } = require('../../models/user.model');
 const {
   connectDb,
   disconnectDb,
-} = require('../services/database/common.database');
+} = require('../../services/database/common.database');
 
 /**
  * Controller for creating a new user.
@@ -26,7 +26,7 @@ async function createUser(request, reply) {
         account_status: 'active',
       },
       name: request.user.displayName || 'Meu Nome',
-      description: request.body.description || 'Mais sobre mim',
+      description: request.body?.description || 'Mais sobre mim',
       thumbnail_url: request.user.photoURL || 'undefined',
       kind: 'orgresources:user',
     };
@@ -48,7 +48,8 @@ async function readUser(request, reply) {
   try {
     const userId = request.params.id;
     await connectDb();
-    const user = await User.findById(userId).exec();
+    // const user = await User.findById(userId).exec();
+    const user = await User.findOne({ id: userId }).exec();
     if (user) {
       reply.code(200).send(user);
     } else {
@@ -61,25 +62,28 @@ async function readUser(request, reply) {
   }
 }
 
-// Controller para ler dados sobre todos os usuários de uma org específica (com paginação)
-async function readAllUsers(request, reply) {
-  try {
-    const orgId = request.params.orgId; // Obtém o orgId dos parâmetros da requisição
-    if (!orgId) {
-      reply.code(400).send({ error: 'Organization ID is required' });
-      return;
-    }
-    await connectDb();
-    const page = parseInt(request.query.page) || 1;
-    const limit = parseInt(request.query.limit) || 10;
-    const skip = (page - 1) * limit;
-    const users = await User.find({ orgId }).skip(skip).limit(limit).exec(); // Busca usuários baseado no orgId
-    reply.code(200).send(users);
-  } catch (error) {
-    reply.code(500).send({ error: error });
-  } finally {
-    await disconnectDb();
+function filterUpdateData(updateData, inputData) {
+  if (inputData.name) {
+    updateData.name = inputData.name;
   }
+
+  if (inputData.description) {
+    updateData.description = inputData.description;
+  }
+
+  if (inputData.thumbnail_url) {
+    updateData.thumbnail_url = inputData.thumbnail_url;
+  }
+
+  if (inputData.resource_data?.phone) {
+    updateData.resource_data.phone = inputData.resource_data.phone;
+
+    if (inputData.resource_data.phone) {
+      updateData.resource_data.phone = inputData.resource_data.phone;
+    }
+  }
+
+  return updateData;
 }
 
 // Controller para modificar um usuário específico
@@ -89,9 +93,18 @@ async function updateUser(request, reply) {
 
     const updateData = request.body;
     await connectDb();
-    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
-      new: true,
-    }).exec();
+
+    const userData = await User.findOne({ id: userId }).exec();
+
+    const updatedObject = filterUpdateData(userData, updateData);
+
+    const updatedUser = await User.findOneAndUpdate(
+      { id: userId },
+      updatedObject,
+      {
+        new: true,
+      },
+    ).exec();
     if (updatedUser) {
       reply.code(200).send(updatedUser);
     } else {
@@ -110,7 +123,7 @@ async function deleteUser(request, reply) {
     const userId = request.user.appuid; // Usuário atualmente autenticado
 
     await connectDb();
-    const deletedUser = await User.findByIdAndDelete(userId).exec();
+    const deletedUser = await User.findOneAndDelete({ id: userId }).exec();
     if (deletedUser) {
       reply.code(200).send({ message: 'User deleted successfully' });
     } else {
@@ -126,7 +139,6 @@ async function deleteUser(request, reply) {
 module.exports = {
   createUser,
   readUser,
-  readAllUsers,
   updateUser,
   deleteUser,
 };

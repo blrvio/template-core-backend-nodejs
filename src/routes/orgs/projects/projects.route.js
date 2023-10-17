@@ -4,7 +4,7 @@ const {
   updateProject,
   deleteProject,
   readAllProjects,
-} = require('../../../controllers/project.controller');
+} = require('../../../controllers/organization/project.controller');
 
 const projectsRoutes = async fastify => {
   fastify.post('/', {

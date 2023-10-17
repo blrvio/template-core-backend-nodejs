@@ -1,10 +1,10 @@
 const { FastifyRequest, FastifyReply } = require('fastify');
-const { Project } = require('../models/project.model');
+const { Project } = require('../../models/project.model');
 const {
   connectDb,
   disconnectDb,
-} = require('../services/database/common.database');
-const { checkUUIDFromToken } = require('../services/database/plugins.database');
+} = require('../../services/database/common.database');
+const { checkUUIDFromToken } = require('../../services/database/plugins.database');
 
 // Controller for creating a new project
 async function createProject(request, reply) {

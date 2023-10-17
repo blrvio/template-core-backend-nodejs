@@ -24,7 +24,6 @@ BaseResourceSchema.pre('updateOne', function (next) {
 BaseResourceSchema.pre('save', function (next) {
   if (this.isNew) {
     this.set({
-      'metadata.created_at': Date.now(),
       'metadata.last_modified': Date.now(),
     });
   }

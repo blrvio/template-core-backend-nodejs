@@ -25,7 +25,7 @@ module.exports = async function (fastify, opts) {
     fastify.setNotFoundHandler(function (request, reply) {
       const err = new Error('Route Not Found');
       apm.captureError(err);
-      reply.code(404).send({ error: 'Not Found' });
+      reply.code(404).send({ error: 'Not Found', requested_route: request.url });
     });
   } else {
     console.info('APM not started');
