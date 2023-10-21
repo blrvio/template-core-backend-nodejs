@@ -33,11 +33,6 @@ module.exports = fp(async fastify => {
           description: 'Please enter JWT with Bearer prefix into field',
         },
       },
-      security: [
-        {
-          bearerToken: [],
-        },
-      ],
     },
   });
 

@@ -30,11 +30,6 @@ const usersRoutes = async fastify => {
         },
       },
       response: userResponseSchema,
-      security: [
-        {
-          bearerAuth: ""
-        }
-      ]
     },
     preHandler: fastify.checkAuth,
     handler: readUser,
@@ -60,11 +55,6 @@ const usersRoutes = async fastify => {
         },
       },
       response: userResponseSchema,
-      security: [
-        {
-          bearerAuth: []
-        }
-      ]
     },
     preHandler: fastify.checkAuth,
     handler: updateUser,
