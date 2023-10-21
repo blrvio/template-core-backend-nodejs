@@ -1,0 +1,2895 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    },
+    {
+      "url": "https://api-dev.blrv.io"
+    },
+    {
+      "url": "https://weasel-cool-tuna.ngrok-free.app"
+    }
+  ],
+  "info": {
+    "title": "Core Backend API",
+    "description": "API documentation for the App",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/healthcheck": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "description": "Create a new user",
+        "tags": ["user"],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved/updated/created user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved/updated/created user",
+                  "type": "object",
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        }
+                      }
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "idp_uuid": {
+                          "type": "string",
+                          "example": "calJYUKMpCQMhN1l89aidFovjNh2"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jonataswinston@icloud.com"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "example": "5511958201004"
+                        },
+                        "account_status": {
+                          "type": "string",
+                          "example": "active"
+                        }
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Jonatas Winston"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Eu sou o cara hehe"
+                    },
+                    "thumbnail_url": {
+                      "type": "string",
+                      "example": "https://google.com"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "example": "orgresources:user"
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "usr_54c9e32d-c321-40ad-888a-b7592014f81c"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved/updated/created user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved/updated/created user",
+                  "type": "object",
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        }
+                      }
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "idp_uuid": {
+                          "type": "string",
+                          "example": "calJYUKMpCQMhN1l89aidFovjNh2"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jonataswinston@icloud.com"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "example": "5511958201004"
+                        },
+                        "account_status": {
+                          "type": "string",
+                          "example": "active"
+                        }
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Jonatas Winston"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Eu sou o cara hehe"
+                    },
+                    "thumbnail_url": {
+                      "type": "string",
+                      "example": "https://google.com"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "example": "orgresources:user"
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "usr_54c9e32d-c321-40ad-888a-b7592014f81c"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a specific user",
+        "tags": ["user"],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved/updated/created user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved/updated/created user",
+                  "type": "object",
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        }
+                      }
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "idp_uuid": {
+                          "type": "string",
+                          "example": "calJYUKMpCQMhN1l89aidFovjNh2"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jonataswinston@icloud.com"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "example": "5511958201004"
+                        },
+                        "account_status": {
+                          "type": "string",
+                          "example": "active"
+                        }
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Jonatas Winston"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Eu sou o cara hehe"
+                    },
+                    "thumbnail_url": {
+                      "type": "string",
+                      "example": "https://google.com"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "example": "orgresources:user"
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "usr_54c9e32d-c321-40ad-888a-b7592014f81c"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved/updated/created user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved/updated/created user",
+                  "type": "object",
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        }
+                      }
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "idp_uuid": {
+                          "type": "string",
+                          "example": "calJYUKMpCQMhN1l89aidFovjNh2"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jonataswinston@icloud.com"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "example": "5511958201004"
+                        },
+                        "account_status": {
+                          "type": "string",
+                          "example": "active"
+                        }
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Jonatas Winston"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Eu sou o cara hehe"
+                    },
+                    "thumbnail_url": {
+                      "type": "string",
+                      "example": "https://google.com"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "example": "orgresources:user"
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "usr_54c9e32d-c321-40ad-888a-b7592014f81c"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "resource_data": {
+                    "type": "object",
+                    "properties": {
+                      "phone": {
+                        "type": "string",
+                        "description": "User phone number"
+                      }
+                    }
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "User name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "User description"
+                  },
+                  "thumbnail_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL of the user thumbnail"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a specific user",
+        "tags": ["user"],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "summary": "Retrieve user details by ID",
+        "description": "Get information about a specific user",
+        "tags": ["user"],
+        "parameters": [
+          {
+            "description": "User ID",
+            "required": true,
+            "in": "path",
+            "name": "userId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved/updated/created user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved/updated/created user",
+                  "type": "object",
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        }
+                      }
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "idp_uuid": {
+                          "type": "string",
+                          "example": "calJYUKMpCQMhN1l89aidFovjNh2"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jonataswinston@icloud.com"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "example": "5511958201004"
+                        },
+                        "account_status": {
+                          "type": "string",
+                          "example": "active"
+                        }
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Jonatas Winston"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Eu sou o cara hehe"
+                    },
+                    "thumbnail_url": {
+                      "type": "string",
+                      "example": "https://google.com"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "example": "orgresources:user"
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "usr_54c9e32d-c321-40ad-888a-b7592014f81c"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved/updated/created user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved/updated/created user",
+                  "type": "object",
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-10-17T18:28:36.439Z"
+                        }
+                      }
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "idp_uuid": {
+                          "type": "string",
+                          "example": "calJYUKMpCQMhN1l89aidFovjNh2"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jonataswinston@icloud.com"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "example": "5511958201004"
+                        },
+                        "account_status": {
+                          "type": "string",
+                          "example": "active"
+                        }
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Jonatas Winston"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Eu sou o cara hehe"
+                    },
+                    "thumbnail_url": {
+                      "type": "string",
+                      "example": "https://google.com"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "example": "orgresources:user"
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "usr_54c9e32d-c321-40ad-888a-b7592014f81c"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iam/orgs/{orgId}/users": {
+      "post": {
+        "description": "Add a user to an organization with specific permissions",
+        "tags": ["IAM"],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "Organization ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "User ID"
+                  },
+                  "permissions": {
+                    "type": "string",
+                    "description": "Permissions set: read, write"
+                  }
+                },
+                "required": ["userId", "permissions"]
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Modify permissions of a user in an organization",
+        "tags": ["IAM"],
+        "parameters": [
+          {
+            "description": "Organization ID",
+            "required": true,
+            "in": "path",
+            "name": "orgId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "User ID"
+                  },
+                  "permission": {
+                    "type": "string",
+                    "description": "Permissions set: read, write"
+                  }
+                },
+                "required": ["userId", "permission"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iam/orgs/{orgId}/users/{userId}": {
+      "delete": {
+        "description": "Remove a user from an organization",
+        "tags": ["IAM"],
+        "parameters": [
+          {
+            "description": "Organization ID",
+            "required": true,
+            "in": "path",
+            "name": "orgId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "User ID",
+            "required": true,
+            "in": "path",
+            "name": "userId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successful response",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Deletion message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iam/orgs/{orgId}/projects/{projectId}/users": {
+      "post": {
+        "description": "Add a user to an organization with specific permissions",
+        "tags": ["IAM"],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "Organization ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "User ID"
+                  },
+                  "permissions": {
+                    "type": "string",
+                    "description": "Permissions set: read, write"
+                  }
+                },
+                "required": ["userId", "permissions"]
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Modify permissions of a user in an organization",
+        "tags": ["IAM"],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Organization ID",
+            "required": true,
+            "in": "path",
+            "name": "orgId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "User ID"
+                  },
+                  "permission": {
+                    "type": "string",
+                    "description": "Permissions set: read, write"
+                  }
+                },
+                "required": ["userId", "permission"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iam/orgs/{orgId}/projects/{projectId}/users/{userId}": {
+      "delete": {
+        "description": "Remove a user from an organization",
+        "tags": ["IAM"],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Organization ID",
+            "required": true,
+            "in": "path",
+            "name": "orgId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "User ID",
+            "required": true,
+            "in": "path",
+            "name": "userId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successful response",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Deletion message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iam/permissions": {
+      "get": {
+        "description": "List all permissions (all users and their permissions) in an organization",
+        "tags": ["IAM"],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successful response",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Organization ID"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "description": "Type of resource"
+                    },
+                    "resource_permissions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "User ID"
+                          },
+                          "permission": {
+                            "type": "string",
+                            "description": "Permission type",
+                            "enum": ["write", "owner", "read"]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orgs": {
+      "post": {
+        "description": "Create a new organization",
+        "tags": ["organization"],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:organization"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "projects": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:organization"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "projects": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Organization name"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get information about all organizations",
+        "tags": ["organization"],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved organizations list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organizations list",
+                  "type": "array",
+                  "items": {
+                    "description": "Successfully retrieved organization data",
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "thumbnail_url": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": ["orgresources:organization"]
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "properties": {
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "last_modified": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "resource_data": {
+                        "type": "object",
+                        "properties": {
+                          "iam": {
+                            "type": "object",
+                            "properties": {
+                              "owner_user": {
+                                "type": "string"
+                              },
+                              "read_users": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "write_users": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "projects": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved organizations list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organizations list",
+                  "type": "array",
+                  "items": {
+                    "description": "Successfully retrieved organization data",
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "thumbnail_url": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": ["orgresources:organization"]
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "properties": {
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "last_modified": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "resource_data": {
+                        "type": "object",
+                        "properties": {
+                          "iam": {
+                            "type": "object",
+                            "properties": {
+                              "owner_user": {
+                                "type": "string"
+                              },
+                              "read_users": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "write_users": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "projects": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orgs/{orgId}": {
+      "get": {
+        "description": "Get information about a specific organization",
+        "tags": ["organization"],
+        "parameters": [
+          {
+            "description": "Organization ID",
+            "required": true,
+            "in": "path",
+            "name": "orgId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:organization"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "projects": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:organization"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "projects": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a specific organization",
+        "tags": ["organization"],
+        "parameters": [
+          {
+            "description": "Organization ID",
+            "required": true,
+            "in": "path",
+            "name": "orgId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:organization"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "projects": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:organization"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "projects": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Org name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Org description"
+                  },
+                  "thumbnail_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL of the org thumbnail"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a specific organization",
+        "tags": ["organization"],
+        "parameters": [
+          {
+            "description": "Organization ID",
+            "required": true,
+            "in": "path",
+            "name": "orgId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successful response",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Deletion message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orgs/{orgId}/projects": {
+      "post": {
+        "description": "Create a new project",
+        "tags": ["project"],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "Organization ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:project"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "org_id": {
+                          "type": "string"
+                        },
+                        "apis_enabled": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "resources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:project"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "org_id": {
+                          "type": "string"
+                        },
+                        "apis_enabled": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "resources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Project name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Project description"
+                  },
+                  "thumbnail_url": {
+                    "type": "string",
+                    "description": "Project thumbnail URL"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get information about all projects",
+        "tags": ["project"],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "Organization ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved projects list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved projects list",
+                  "type": "array",
+                  "items": {
+                    "description": "Successfully retrieved organization data",
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "thumbnail_url": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": ["orgresources:project"]
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "properties": {
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "last_modified": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "resource_data": {
+                        "type": "object",
+                        "properties": {
+                          "org_id": {
+                            "type": "string"
+                          },
+                          "apis_enabled": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "iam": {
+                            "type": "object",
+                            "properties": {
+                              "owner_user": {
+                                "type": "string"
+                              },
+                              "read_users": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "write_users": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "resources": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved projects list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved projects list",
+                  "type": "array",
+                  "items": {
+                    "description": "Successfully retrieved organization data",
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "thumbnail_url": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": ["orgresources:project"]
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "properties": {
+                          "created_at": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "last_modified": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "resource_data": {
+                        "type": "object",
+                        "properties": {
+                          "org_id": {
+                            "type": "string"
+                          },
+                          "apis_enabled": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "iam": {
+                            "type": "object",
+                            "properties": {
+                              "owner_user": {
+                                "type": "string"
+                              },
+                              "read_users": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "write_users": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "resources": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orgs/{orgId}/projects/{projectId}": {
+      "get": {
+        "description": "Get information about a specific project",
+        "tags": ["project"],
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "Organization ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:project"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "org_id": {
+                          "type": "string"
+                        },
+                        "apis_enabled": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "resources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:project"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "org_id": {
+                          "type": "string"
+                        },
+                        "apis_enabled": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "resources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a specific project",
+        "tags": ["project"],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "Organization ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:project"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "org_id": {
+                          "type": "string"
+                        },
+                        "apis_enabled": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "resources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully retrieved organization data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successfully retrieved organization data",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "thumbnail_url": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["orgresources:project"]
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "last_modified": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "resource_data": {
+                      "type": "object",
+                      "properties": {
+                        "org_id": {
+                          "type": "string"
+                        },
+                        "apis_enabled": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "iam": {
+                          "type": "object",
+                          "properties": {
+                            "owner_user": {
+                              "type": "string"
+                            },
+                            "read_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "write_users": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "resources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a specific project",
+        "tags": ["project"],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgId",
+            "in": "path",
+            "description": "Organization ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Successful response",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Deletion message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Forbidden",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Internal server error",
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://swagger.io",
+    "description": "Find more info here"
+  },
+  "components": {
+    "requestBodies": {
+      "Body": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "description": "User ID"
+                },
+                "permissions": {
+                  "type": "string",
+                  "description": "Permissions set: read, write"
+                }
+              },
+              "required": ["userId", "permissions"]
+            }
+          }
+        }
+      },
+      "Body2": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "description": "User ID"
+                },
+                "permission": {
+                  "type": "string",
+                  "description": "Permissions set: read, write"
+                }
+              },
+              "required": ["userId", "permission"]
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerToken": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Please enter JWT with Bearer prefix into field"
+      }
+    }
+  }
+}

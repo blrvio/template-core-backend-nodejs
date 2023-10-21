@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Config
+
+# O nível de severidade mínimo a ser exibido (UNKNOWN, LOW, MEDIUM, HIGH, CRITICAL)
+severity: HIGH
+
+# Ignorar as vulnerabilidades desatualizadas
+ignoreUnfixed: true
+
+# # O caminho para o arquivo que contém as exceções de vulnerabilidade
+# skipFile: .trivyignore
+
+# # O caminho para o diretório que contém os relatórios
+# output: results
+
+# Limite de vulnerabilidades a serem exibidas
+vulnType:
+  os: true
+  library: true
+
+# Configurações do relatório
+reports:
+  # Formato do relatório (json, template, etc.)
+  format: json
+
+  # Template para o relatório
+  template: '@/contrib/sarif.tpl'
+
+  # Caminho do arquivo de saída
+  output: trivy-report.json
