@@ -26,7 +26,7 @@ const usersRoutes = async fastify => {
       params: {
         type: 'object',
         properties: {
-          id: { type: 'string', description: 'User ID'},
+          id: { type: 'string', description: 'User ID' },
         },
       },
       response: userResponseSchema,
@@ -46,12 +46,25 @@ const usersRoutes = async fastify => {
           resource_data: {
             type: 'object',
             properties: {
-              phone: { type: 'string', nullable: true, description: 'User phone number' }
+              phone: {
+                type: 'string',
+                nullable: true,
+                description: 'User phone number',
+              },
             },
           },
           name: { type: 'string', nullable: true, description: 'User name' },
-          description: { type: 'string', nullable: true, description: 'User description' },
-          thumbnail_url: { type: 'string', format: 'uri', nullable: true, description: 'URL of the user thumbnail' },
+          description: {
+            type: 'string',
+            nullable: true,
+            description: 'User description',
+          },
+          thumbnail_url: {
+            type: 'string',
+            format: 'uri',
+            nullable: true,
+            description: 'URL of the user thumbnail',
+          },
         },
       },
       response: userResponseSchema,

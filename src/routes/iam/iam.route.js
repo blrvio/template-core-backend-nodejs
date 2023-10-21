@@ -3,7 +3,7 @@ const {
   getUserPermissions,
   modifyUserPermissions,
   removeUserFromOrganization,
-  listAllPermissions
+  listAllPermissions,
 } = require('./iam.controller');
 
 const iamRoutes = async fastify => {
@@ -15,12 +15,12 @@ const iamRoutes = async fastify => {
         type: 'object',
         properties: {
           userId: { type: 'string', description: 'User ID' },
-          permissions: { 
+          permissions: {
             type: 'string',
-            description: 'Permissions set: read, write'
+            description: 'Permissions set: read, write',
           },
         },
-        required: ['userId', 'permissions']
+        required: ['userId', 'permissions'],
       },
     },
     preHandler: fastify.checkAuth,
@@ -34,19 +34,19 @@ const iamRoutes = async fastify => {
       params: {
         type: 'object',
         properties: {
-          orgId: { type: 'string', description: 'Organization ID' }
+          orgId: { type: 'string', description: 'Organization ID' },
         },
       },
       body: {
         type: 'object',
         properties: {
           userId: { type: 'string', description: 'User ID' },
-          permission: { 
+          permission: {
             type: 'string',
-            description: 'Permissions set: read, write'
+            description: 'Permissions set: read, write',
           },
         },
-        required: ['userId', 'permission']
+        required: ['userId', 'permission'],
       },
     },
     preHandler: fastify.checkAuth,
@@ -100,12 +100,12 @@ const iamRoutes = async fastify => {
         type: 'object',
         properties: {
           userId: { type: 'string', description: 'User ID' },
-          permissions: { 
+          permissions: {
             type: 'string',
-            description: 'Permissions set: read, write'
+            description: 'Permissions set: read, write',
           },
         },
-        required: ['userId', 'permissions']
+        required: ['userId', 'permissions'],
       },
     },
     preHandler: fastify.checkAuth,
@@ -119,19 +119,19 @@ const iamRoutes = async fastify => {
       params: {
         type: 'object',
         properties: {
-          orgId: { type: 'string', description: 'Organization ID' }
+          orgId: { type: 'string', description: 'Organization ID' },
         },
       },
       body: {
         type: 'object',
         properties: {
           userId: { type: 'string', description: 'User ID' },
-          permission: { 
+          permission: {
             type: 'string',
-            description: 'Permissions set: read, write'
+            description: 'Permissions set: read, write',
           },
         },
-        required: ['userId', 'permission']
+        required: ['userId', 'permission'],
       },
     },
     preHandler: fastify.checkAuth,
@@ -179,7 +179,8 @@ const iamRoutes = async fastify => {
 
   fastify.get('/permissions', {
     schema: {
-      description: 'List all permissions (all users and their permissions) in an organization',
+      description:
+        'List all permissions (all users and their permissions) in an organization',
       tags: ['IAM'],
       params: {
         type: 'object',
@@ -200,14 +201,18 @@ const iamRoutes = async fastify => {
                 type: 'object',
                 properties: {
                   id: { type: 'string', description: 'User ID' },
-                  permission: { type: 'string', description: 'Permission type', enum: ['write', 'owner', 'read'] }
-                }
-              }
-            }
-          }
+                  permission: {
+                    type: 'string',
+                    description: 'Permission type',
+                    enum: ['write', 'owner', 'read'],
+                  },
+                },
+              },
+            },
+          },
         },
         // TODO: ... (outros códigos de status de resposta, como 400, 404, etc., se necessário)
-      }
+      },
     },
     preHandler: fastify.checkAuth,
     handler: listAllPermissions,

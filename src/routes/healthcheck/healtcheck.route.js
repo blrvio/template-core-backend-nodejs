@@ -8,7 +8,15 @@ const healthCheck = async fastify => {
       const isExternalApiHealthy = true; // substitua por uma verificação real da API externa
 
       if (isDatabaseHealthy && isExternalApiHealthy) {
-        reply.status(200).send({ status: 'ok', metadata: { uptime: process.uptime(), hostname: process.env.HOSTNAME } });
+        reply
+          .status(200)
+          .send({
+            status: 'ok',
+            metadata: {
+              uptime: process.uptime(),
+              hostname: process.env.HOSTNAME,
+            },
+          });
       } else {
         reply.status(500).send({
           status: 'error',

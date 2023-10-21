@@ -1,4 +1,7 @@
-const { projResponseSchema, projListResponseSchema } = require('../../../models/openapi/projects.oas');
+const {
+  projResponseSchema,
+  projListResponseSchema,
+} = require('../../../models/openapi/projects.oas');
 const {
   createProject,
   readProject,
@@ -23,7 +26,7 @@ const projectsRoutes = async fastify => {
           },
         },
       },
-      response: projResponseSchema
+      response: projResponseSchema,
     },
     preHandler: fastify.checkAuth,
     handler: createProject,
@@ -39,7 +42,7 @@ const projectsRoutes = async fastify => {
           id: { type: 'string', description: 'Project ID' },
         },
       },
-      response: projResponseSchema
+      response: projResponseSchema,
     },
     preHandler: fastify.checkAuth,
     handler: readProject,
@@ -49,7 +52,7 @@ const projectsRoutes = async fastify => {
     schema: {
       description: 'Get information about all projects',
       tags: ['project'],
-      response: projListResponseSchema
+      response: projListResponseSchema,
     },
     preHandler: fastify.checkAuth,
     handler: readAllProjects,
@@ -65,7 +68,7 @@ const projectsRoutes = async fastify => {
           id: { type: 'string', description: 'Project ID' },
         },
       },
-      response: projResponseSchema
+      response: projResponseSchema,
     },
     preHandler: fastify.checkAuth,
     handler: updateProject,

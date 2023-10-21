@@ -4,7 +4,9 @@ const {
   connectDb,
   disconnectDb,
 } = require('../../services/database/common.database');
-const { checkUUIDFromToken } = require('../../services/database/plugins.database');
+const {
+  checkUUIDFromToken,
+} = require('../../services/database/plugins.database');
 
 /**
  * Controller for creating a new organization.
@@ -71,11 +73,11 @@ async function readOrganization(request, reply) {
     await disconnectDb();
   }
 }
- 
+
 /**
  * Controller for reading data about all organizations.
  *
- * 
+ *
  * @param {FastifyRequest} request - The Fastify request object
  * @param {FastifyReply} reply - The Fastify reply object
  * @returns {Promise<void>}

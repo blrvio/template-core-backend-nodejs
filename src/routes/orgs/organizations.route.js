@@ -1,4 +1,7 @@
-const { orgResponseSchema, orgListResponseSchema } = require('../../models/openapi/organizations.oas');
+const {
+  orgResponseSchema,
+  orgListResponseSchema,
+} = require('../../models/openapi/organizations.oas');
 const {
   createOrganization,
   readOrganization,
@@ -64,8 +67,17 @@ const organizationsRoutes = async fastify => {
         type: 'object',
         properties: {
           name: { type: 'string', nullable: true, description: 'Org name' },
-          description: { type: 'string', nullable: true, description: 'Org description' },
-          thumbnail_url: { type: 'string', format: 'uri', nullable: true, description: 'URL of the org thumbnail' },
+          description: {
+            type: 'string',
+            nullable: true,
+            description: 'Org description',
+          },
+          thumbnail_url: {
+            type: 'string',
+            format: 'uri',
+            nullable: true,
+            description: 'URL of the org thumbnail',
+          },
         },
         required: [],
       },
@@ -73,8 +85,7 @@ const organizationsRoutes = async fastify => {
     },
     preHandler: fastify.checkAuth,
     handler: updateOrganization,
-});
-
+  });
 
   fastify.delete('/:id', {
     schema: {

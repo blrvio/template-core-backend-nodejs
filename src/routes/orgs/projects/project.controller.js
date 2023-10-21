@@ -82,19 +82,21 @@ async function readProject(request, reply) {
     const orgId = project.resource_data.org_id;
     const organization = await Organization.findOne({ id: orgId });
     if (!organization) {
-      return reply.code(404).send({ error: 'Organization associated with the project not found' });
+      return reply
+        .code(404)
+        .send({ error: 'Organization associated with the project not found' });
     }
 
     // Verificando as permissões do usuário na organização
     const orgIamData = organization.resource_data.iam;
     const projectIamData = project.resource_data.iam;
 
-    const hasOrgPermission = 
+    const hasOrgPermission =
       orgIamData.read_users.includes(user_uuid) ||
       orgIamData.write_users.includes(user_uuid) ||
       orgIamData.owner_user === user_uuid;
 
-    const hasProjectPermission = 
+    const hasProjectPermission =
       projectIamData.read_users.includes(user_uuid) ||
       projectIamData.write_users.includes(user_uuid) ||
       projectIamData.owner_user === user_uuid;
@@ -105,14 +107,12 @@ async function readProject(request, reply) {
 
     // Se o usuário tem permissão de leitura na organização ou no projeto, ele pode ler detalhes do projeto
     reply.code(200).send(project);
-
   } catch (error) {
     reply.code(500).send({ error: error.message });
   } finally {
     await disconnectDb();
   }
 }
-
 
 // Controller for reading data about all projects of a specific user
 async function readAllProjects(request, reply) {

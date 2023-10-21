@@ -223,7 +223,9 @@ async function listAllPermissions(request, reply) {
     } else if (projectId) {
       entity = await Project.findOne({ id: projectId }); // Assumindo que você tenha um modelo chamado "Project"
     } else {
-      return reply.code(400).send({ error: 'Either orgId or projectId should be provided' });
+      return reply
+        .code(400)
+        .send({ error: 'Either orgId or projectId should be provided' });
     }
 
     if (!entity) {
@@ -263,7 +265,6 @@ async function listAllPermissions(request, reply) {
     await disconnectDb();
   }
 }
-
 
 module.exports = {
   addUserToOrganization,
