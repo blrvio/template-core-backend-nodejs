@@ -1,10 +1,11 @@
+const { projResponseSchema, projListResponseSchema } = require('../../../models/openapi/projects.oas');
 const {
   createProject,
   readProject,
   updateProject,
   deleteProject,
   readAllProjects,
-} = require('../../../controllers/organization/project.controller');
+} = require('./project.controller');
 
 const projectsRoutes = async fastify => {
   fastify.post('/', {
@@ -15,25 +16,14 @@ const projectsRoutes = async fastify => {
         type: 'object',
         properties: {
           name: { type: 'string', description: 'Project name' },
-          // ... (other properties if needed)
-        },
-      },
-      response: {
-        201: {
-          description: 'Successful response',
-          type: 'object',
-          properties: {
-            // ... (similar structure to Organization)
-          },
-        },
-        500: {
-          description: 'Internal server error',
-          type: 'object',
-          properties: {
-            error: { type: 'string' },
+          description: { type: 'string', description: 'Project description' },
+          thumbnail_url: {
+            type: 'string',
+            description: 'Project thumbnail URL',
           },
         },
       },
+      response: projResponseSchema
     },
     preHandler: fastify.checkAuth,
     handler: createProject,
@@ -49,6 +39,7 @@ const projectsRoutes = async fastify => {
           id: { type: 'string', description: 'Project ID' },
         },
       },
+      response: projResponseSchema
     },
     preHandler: fastify.checkAuth,
     handler: readProject,
@@ -58,6 +49,7 @@ const projectsRoutes = async fastify => {
     schema: {
       description: 'Get information about all projects',
       tags: ['project'],
+      response: projListResponseSchema
     },
     preHandler: fastify.checkAuth,
     handler: readAllProjects,
@@ -73,6 +65,7 @@ const projectsRoutes = async fastify => {
           id: { type: 'string', description: 'Project ID' },
         },
       },
+      response: projResponseSchema
     },
     preHandler: fastify.checkAuth,
     handler: updateProject,
@@ -85,7 +78,7 @@ const projectsRoutes = async fastify => {
       params: {
         type: 'object',
         properties: {
-          id: { type: 'string', description: 'Project ID' },
+          projId: { type: 'string', description: 'Project ID' },
         },
       },
       response: {

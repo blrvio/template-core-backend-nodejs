@@ -115,9 +115,8 @@ const organizationsRoutes = async fastify => {
   });
 
   fastify.register(require('./projects/projects.route'), {
-    prefix: '/:orgid/projects',
+    prefix: '/:orgId/projects',
   });
-  fastify.register(require('./iam/iam.route'), { prefix: '/:orgId/iam' });
 };
 
 module.exports = organizationsRoutes;

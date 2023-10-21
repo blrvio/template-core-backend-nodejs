@@ -1,12 +1,12 @@
 const { FastifyRequest, FastifyReply } = require('fastify');
-const { Organization } = require('../../../models/organization.model');
+const { Organization } = require('../../models/organization.model');
 const {
   connectDb,
   disconnectDb,
-} = require('../../../services/database/common.database');
+} = require('../../services/database/common.database');
 const {
   checkUUIDFromToken,
-} = require('../../../services/database/plugins.database');
+} = require('../../services/database/plugins.database');
 
 /**
  * Adds a user to the organization with the specified permission.
@@ -125,12 +125,14 @@ async function modifyUserPermissions(request, reply) {
       return reply.code(404).send({ error: 'Organization not found' });
     }
 
+    console.log(requestingUserId);
+
     // Verificar se o usuário que faz a solicitação é owner ou admin
     const isOwner =
       organization.resource_data.iam.owner_user === requestingUserId;
     const isAdmin =
-      organization.resource_data.iam.admin_users &&
-      organization.resource_data.iam.admin_users.includes(requestingUserId);
+      organization.resource_data.iam.write_users &&
+      organization.resource_data.iam.write_users.includes(requestingUserId);
 
     if (!isOwner && !isAdmin) {
       return reply.code(403).send({ error: 'Permission denied' });
@@ -183,8 +185,8 @@ async function removeUserFromOrganization(request, reply) {
     const isOwner =
       organization.resource_data.iam.owner_user === requestingUserId;
     const isAdmin =
-      organization.resource_data.iam.admin_users &&
-      organization.resource_data.iam.admin_users.includes(requestingUserId);
+      organization.resource_data.iam.write_users &&
+      organization.resource_data.iam.write_users.includes(requestingUserId);
 
     if (!isOwner && !isAdmin) {
       return reply.code(403).send({ error: 'Permission denied' });
@@ -211,18 +213,26 @@ async function removeUserFromOrganization(request, reply) {
 async function listAllPermissions(request, reply) {
   try {
     const requesterUUID = request.user.appuid; // Assumindo que você tenha uma função para recuperar o UUID a partir do token.
-    const { orgId } = request.params;
+    const { orgId, projectId } = request.query; // Agora pegando os query parameters
 
     await connectDb();
-    const organization = await Organization.findOne({ id: orgId });
 
-    if (!organization) {
-      return reply.code(404).send({ error: 'Organization not found' });
+    let entity;
+    if (orgId) {
+      entity = await Organization.findOne({ id: orgId });
+    } else if (projectId) {
+      entity = await Project.findOne({ id: projectId }); // Assumindo que você tenha um modelo chamado "Project"
+    } else {
+      return reply.code(400).send({ error: 'Either orgId or projectId should be provided' });
     }
 
-    const iamData = organization.resource_data.iam;
+    if (!entity) {
+      return reply.code(404).send({ error: 'Entity not found' });
+    }
 
-    // Verifica se o requester tem alguma permissão na organização
+    const iamData = entity.resource_data.iam;
+
+    // Verifica se o requester tem alguma permissão na organização ou projeto
     if (
       !iamData.read_users.includes(requesterUUID) &&
       !iamData.write_users.includes(requesterUUID) &&
@@ -231,8 +241,6 @@ async function listAllPermissions(request, reply) {
       return reply.code(403).send({ error: 'Permission denied' });
     }
 
-    console.log(iamData.owner_user);
-
     let permissionsList = [];
     iamData.read_users.forEach(userUUID => {
       permissionsList.push({ id: userUUID, permission: 'read' });
@@ -240,12 +248,11 @@ async function listAllPermissions(request, reply) {
     iamData.write_users.forEach(userUUID => {
       permissionsList.push({ id: userUUID, permission: 'write' });
     });
-    // Considerando que o owner é uma única string
     permissionsList.push({ id: iamData.owner_user, permission: 'owner' });
 
     const result = {
-      id: organization.id,
-      kind: organization.kind, // Assumindo que você tenha um campo 'kind' em sua entidade Organization
+      id: entity.id,
+      kind: entity.kind,
       resource_permissions: permissionsList,
     };
 
@@ -256,6 +263,7 @@ async function listAllPermissions(request, reply) {
     await disconnectDb();
   }
 }
+
 
 module.exports = {
   addUserToOrganization,

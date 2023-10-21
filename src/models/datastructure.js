@@ -99,14 +99,14 @@ const project_model = {
     unique: true,
   },
   resource_data: {
-    has_org: { type: Boolean, required: true },
-    org_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Organization' },
+    org_id: { type: String, ref: 'Organization' },
     apis_enabled: [{ type: String }],
     iam: {
-      read_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-      write_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+      owner_user: { type: String, ref: 'User' },
+      read_users: [{ type: String, ref: 'User' }],
+      write_users: [{ type: String, ref: 'User' }],
     },
-    resources: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Resource' }],
+    resources: [{ type: String, ref: 'Resource' }],
   },
 };
 

@@ -7,7 +7,7 @@ const {
 } = require('./iam.controller');
 
 const iamRoutes = async fastify => {
-  fastify.post('/users', {
+  fastify.post('/orgs/:orgId/users', {
     schema: {
       description: 'Add a user to an organization with specific permissions',
       tags: ['IAM'],
@@ -27,7 +27,7 @@ const iamRoutes = async fastify => {
     handler: addUserToOrganization,
   });
 
-  fastify.put('/users', {
+  fastify.put('/orgs/:orgId/users', {
     schema: {
       description: 'Modify permissions of a user in an organization',
       tags: ['IAM'],
@@ -53,7 +53,92 @@ const iamRoutes = async fastify => {
     handler: modifyUserPermissions,
   });
 
-  fastify.delete('/users/:userId', {
+  fastify.delete('/orgs/:orgId/users/:userId', {
+    schema: {
+      description: 'Remove a user from an organization',
+      tags: ['IAM'],
+      params: {
+        type: 'object',
+        properties: {
+          orgId: { type: 'string', description: 'Organization ID' },
+          userId: { type: 'string', description: 'User ID' },
+        },
+      },
+      response: {
+        200: {
+          description: 'Successful response',
+          type: 'object',
+          properties: {
+            message: { type: 'string', description: 'Deletion message' },
+          },
+        },
+        403: {
+          description: 'Forbidden',
+          type: 'object',
+          properties: {
+            error: { type: 'string' },
+          },
+        },
+        500: {
+          description: 'Internal server error',
+          type: 'object',
+          properties: {
+            error: { type: 'string' },
+          },
+        },
+      },
+    },
+    preHandler: fastify.checkAuth,
+    handler: removeUserFromOrganization,
+  });
+  //////////////////////////////////////------------------
+  fastify.post('/orgs/:orgId/projects/:projectId/users', {
+    schema: {
+      description: 'Add a user to an organization with specific permissions',
+      tags: ['IAM'],
+      body: {
+        type: 'object',
+        properties: {
+          userId: { type: 'string', description: 'User ID' },
+          permissions: { 
+            type: 'string',
+            description: 'Permissions set: read, write'
+          },
+        },
+        required: ['userId', 'permissions']
+      },
+    },
+    preHandler: fastify.checkAuth,
+    handler: addUserToOrganization,
+  });
+
+  fastify.put('/orgs/:orgId/projects/:projectId/users', {
+    schema: {
+      description: 'Modify permissions of a user in an organization',
+      tags: ['IAM'],
+      params: {
+        type: 'object',
+        properties: {
+          orgId: { type: 'string', description: 'Organization ID' }
+        },
+      },
+      body: {
+        type: 'object',
+        properties: {
+          userId: { type: 'string', description: 'User ID' },
+          permission: { 
+            type: 'string',
+            description: 'Permissions set: read, write'
+          },
+        },
+        required: ['userId', 'permission']
+      },
+    },
+    preHandler: fastify.checkAuth,
+    handler: modifyUserPermissions,
+  });
+
+  fastify.delete('/orgs/:orgId/projects/:projectId/users/:userId', {
     schema: {
       description: 'Remove a user from an organization',
       tags: ['IAM'],
@@ -92,7 +177,7 @@ const iamRoutes = async fastify => {
     handler: removeUserFromOrganization,
   });
 
-  fastify.get('/users/permissions', {
+  fastify.get('/permissions', {
     schema: {
       description: 'List all permissions (all users and their permissions) in an organization',
       tags: ['IAM'],
@@ -127,7 +212,6 @@ const iamRoutes = async fastify => {
     preHandler: fastify.checkAuth,
     handler: listAllPermissions,
   });
-  
 };
 
 module.exports = iamRoutes;
