@@ -395,7 +395,7 @@
                 }
             }
         },
-        "/users/{id}": {
+        "/users/{userId}": {
             "get": {
                 "summary": "Retrieve user details by ID",
                 "description": "Get information about a specific user",
@@ -408,7 +408,7 @@
                         "description": "User ID",
                         "required": true,
                         "in": "path",
-                        "name": "id"
+                        "name": "userId"
                     }
                 ],
                 "responses": {
@@ -1294,7 +1294,7 @@
                 }
             }
         },
-        "/orgs/{id}": {
+        "/orgs/{orgId}": {
             "get": {
                 "description": "Get information about a specific organization",
                 "tags": [
@@ -1306,7 +1306,7 @@
                         "description": "Organization ID",
                         "required": true,
                         "in": "path",
-                        "name": "id"
+                        "name": "orgId"
                     }
                 ],
                 "responses": {
