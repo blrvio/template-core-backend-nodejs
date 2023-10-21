@@ -16,5 +16,5 @@ rootDirectory = postman/collections
 files[] = {"path":"apidocs.json","metaData":{}}
 
 [config.relations.apiDefinition.metaData]
-type = openapi:2
+type = openapi:3
 rootFiles[] = apidocs.json
